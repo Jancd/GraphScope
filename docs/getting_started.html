@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; GraphScope  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment" href="deployment.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> GraphScope
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-node-clustering-on-citation-network">Example: Node clustering on Citation Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launching-session">Launching Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-graph">Loading Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-query">Interactive Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graph-analytics">Graph Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#graph-neural-networks-gnns">Graph Neural Networks (GNNs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#closing-session">Closing Session</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loading_graph.html">Loading Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactive_engine.html">GraphScope Interactive Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analytics_engine.html">GraphScope Analytical Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learning_engine.html">GraphScope Learning Engine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide.html">Developer Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/python_index.html">Python API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/analytical_engine_index.html">Analytical Engine API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GraphScope</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p><cite>graphscope</cite> is the Python client for GraphScope,
+a one-stop graph computation system to process interactive queries,
+analytical jobs and graph learning. It featured with ease-of-use, high-performance and
+the scalability to evaluate graph computations over extremely large graphs.</p>
+<p>This guide takes a walk-through for the <cite>graphscope</cite>.
+We use a concrete example to illustrate how GraphScope
+can be used by data scientists to effectively analyze large graphs.</p>
+<div class="section" id="example-node-clustering-on-citation-network">
+<h2>Example: Node clustering on Citation Network<a class="headerlink" href="#example-node-clustering-on-citation-network" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://ogb.stanford.edu/docs/nodeprop/#ogbn-mag">ogbn-mag</a> is a
+heterogeneous network composed of a subset of the Microsoft
+Academic Graph. It contains 4 types of entities(i.e., papers, authors, institutions, and fields of study),
+as well as four types of directed relations connecting two entities.</p>
+<p>Given the heterogeneous ogbn-mag data,
+the prediction task is to predict the classification of each paper.
+Node clustering can group papers sharing the similar topics together,
+which identifies cooperations and trends in scientific groups.
+We apply the attribute and structural information to cluster
+similar papers together. In the graph, each paper node contains
+a 128-dimensional word2vec vector representing its content,
+which is obtained by averaging the embeddings of words in
+its title and abstract. The embeddings of individual words
+are pre-trained. The structural information is computed on-the-fly.</p>
+<a class="reference internal image-reference" href="_images/how-it-works.png"><img alt="How it works." class="align-center" src="_images/how-it-works.png" style="width: 600px;" /></a>
+<p>The figure shows the flow of execution when a client Python program is executed..</p>
+<p>Step 1. Create a session or workspace in GraphScope.
+Step 2. Define schema and load the graph.
+Step 3. Query graph data.
+Step 4. Run graph algorithms.
+Step 5. Run graph-based machine learing tasks.
+Step 6. Close the session.</p>
+</div>
+<div class="section" id="launching-session">
+<h2>Launching Session<a class="headerlink" href="#launching-session" title="Permalink to this headline">¶</a></h2>
+<p>To use GraphScope, we need to establish a <a class="reference internal" href="reference/session.html#session"><span class="std std-ref">Session</span></a> in a python interpreter.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>import graphscope
+sess = graphscope.session()
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="reference/session.html#session"><span class="std std-ref">Session</span></a> tries to launch a coordinator,
+which is the entry for the back-end engines.
+The coordinator manages a cluster of resources (k8s pods),
+and the interactive/analytical/learning engines ran on them.
+For each pod in the cluster,
+there is a vineyard instance at service for distributed data in memory.</p>
+</div>
+<div class="section" id="loading-graph">
+<h2>Loading Graph<a class="headerlink" href="#loading-graph" title="Permalink to this headline">¶</a></h2>
+<p>GraphScope models graph data as property graph,
+in which the edges/vertices are labeled and have many properties.
+Taking ogbn-mag as example, the figure below shows the model of the property graph.</p>
+<a class="reference internal image-reference" href="_images/sample_pg.png"><img alt="a sample property graph." class="align-center" src="_images/sample_pg.png" style="width: 600px;" /></a>
+<p>This graph has fours kinds of vertices, labeled as Paper, Author,
+Institution and Field_of_study.
+There are four kinds of edges connecting them,
+each kind of edges has a label and specifies the vertex labels
+for its two ends. For example, Cites edges connect two vertices labeled Paper.
+Another example is Writes, it requires the source vertex is
+labeled Author and the destination is a Paper vertex.
+All the vertices and edges may have properties. e.g.,
+Paper vertices have properties like features, publish year, subject label, etc.</p>
+<p>To load this graph to GraphScope, one may use the code below.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>g = sess.load_from(
+    vertices={
+        &quot;paper&quot;: &quot;paper.csv&quot;,
+        &quot;author&quot;: &quot;author.csv&quot;,
+        &quot;institution&quot;: &quot;institution.csv&quot;,
+        &quot;field_of_study&quot;: &quot;field_of_study.csv&quot;,
+    },
+    edges={
+        &quot;affiliated&quot;: (
+            &quot;author_affiliated_with_institution.csv&quot;,
+            [],
+            (&quot;src_id&quot;, &quot;author&quot;),
+            (&quot;dst_id&quot;, &quot;institution&quot;),
+        ),
+        &quot;cites&quot;: (
+            &quot;paper_cites_paper.csv&quot;,
+            [],
+            (&quot;src_id&quot;, &quot;paper&quot;),
+            (&quot;dst_id&quot;, &quot;paper&quot;),
+        ),
+        &quot;hasTopic&quot;: (
+            &quot;paper_has_topic_field_of_study.csv&quot;,
+            [],
+            (&quot;src_id&quot;, &quot;paper&quot;),
+            (&quot;dst_id&quot;, &quot;field_of_study&quot;),
+        ),
+        &quot;writes&quot;: (
+            &quot;author_writes_paper.csv&quot;,
+            [],
+            (&quot;src_id&quot;, &quot;author&quot;),
+            (&quot;dst_id&quot;, &quot;paper&quot;),
+        ),
+    }
+)
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">g</span></code> is loaded in parallel via vineyard and stored
+in vineyard instances in the cluster managed by the session.
+See more details in <a class="reference internal" href="loading_graph.html#loading-graphs"><span class="std std-ref">Loading Graphs</span></a></p>
+</div>
+<div class="section" id="interactive-query">
+<h2>Interactive Query<a class="headerlink" href="#interactive-query" title="Permalink to this headline">¶</a></h2>
+<p>Understanding diverse graph data is an essential prerequisite to effective analysis,
+and therefore it is very common for users to directly explore,
+examine, and present graph data in an interactive environment
+in order to locate specific information in time.
+GraphScope adopts a high-level language called Gremlin
+for graph traversal, and provides efficient execution at scale.</p>
+<p>In this example, we use graph queries to find citation counts
+for a particular author, and to derive a subgraph by
+extracting publications in specific time out of the entire graph.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span># get the entrypoint for submitting Gremlin queries on graph g.
+interactive = sess.gremlin(g)
+
+# check the total node_num and edge_num
+node_num = interactive.execute(&quot;g.V().count()&quot;).one()
+edge_num = interactive.execute(&quot;g.E().count()&quot;).one()
+
+# count the number of papers two authors (with id 2 and 4307) have co-authored.
+papers = interactive.execute(&quot;g.V().has(&#39;author&#39;, &#39;id&#39;, 2).out(&#39;writes&#39;)\
+                .where(__.in(&#39;writes&#39;).has(&#39;id&#39;, 4307)).count()&quot;).one()
+</pre></div>
+</div>
+</div>
+<div class="section" id="graph-analytics">
+<h2>Graph Analytics<a class="headerlink" href="#graph-analytics" title="Permalink to this headline">¶</a></h2>
+<p>Graph analytics is widely used in real world. Many algorithms,
+like community detection, paths and connectivity, centrality are proven to be
+very useful in various businesses. GraphScope ships
+with a set of built-in algorithms, enables users easily analysis their graph data.</p>
+<p>Please note that many algorithms may only work on homogeneous graphs.
+To evaluate these algorithms over a property graph,
+you may want to project the property graph to a simple graph at first.</p>
+<p>Continue our example, we run k-core decomposition and triangle counting
+to generate the structural features of each paper node.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span># exact a subgraph of publication within a time range
+sub_graph = interactive.subgraph(&quot;g.V().has(&#39;year&#39;, inside(2014, 2020)).outE(&#39;cites&#39;)&quot;)
+
+# project the projected graph to simple graph.
+simple_g = sub_graph.project_to_simple(vlabel=&quot;paper&quot;, elabel=&quot;cites&quot;)
+
+ret1 = graphscope.kcore(simple_g, k=5)
+ret2 = graphscope.triangle(simple_g)
+
+# add the results as new columns to the citation graph
+sub_graph = sub_graph.add_column(ret1, {&quot;kcore&quot;: &quot;r&quot;})
+sub_graph = sub_graph.add_column(ret2, {&quot;tc&quot;: &quot;r&quot;})
+</pre></div>
+</div>
+<p>In addition, users can write their own algorithms in GraphScope.
+Currently, GraphScope support users to write their own algorithms in
+PIE model and Pregel model.</p>
+</div>
+<div class="section" id="graph-neural-networks-gnns">
+<h2>Graph Neural Networks (GNNs)<a class="headerlink" href="#graph-neural-networks-gnns" title="Permalink to this headline">¶</a></h2>
+<p>Graph neural networks (GNNs) combines superiority of
+both graph analytics and machine learning.
+GNN algorithms can compress both structural and attribute information
+in a graph into low-dimensional embedding vectors on each node.
+These embeddings can be further fed into downstream machine learning tasks.</p>
+<p>In our example, we train a GCN model to classify the nodes (papers) into 349 categories,
+each of which represents a venue (e.g. pre-print and conference).
+To achieve this, first we launch a learning engine and build
+a graph with features following the last step.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span># define the features for learning
+paper_features = []
+for i in range(128):
+    paper_features.append(&quot;feat_&quot; + str(i))
+paper_features.append(&quot;kcore&quot;)
+paper_features.append(&quot;tc&quot;)
+
+# launch a learning engine.
+lg = sess.learning(sub_graph, nodes=[(&quot;paper&quot;, paper_features)],
+                   edges=[(&quot;paper&quot;, &quot;cites&quot;, &quot;paper&quot;)],
+                   gen_labels=[
+                        (&quot;train&quot;, &quot;paper&quot;, 100, (0, 75)),
+                        (&quot;val&quot;, &quot;paper&quot;, 100, (75, 85)),
+                        (&quot;test&quot;, &quot;paper&quot;, 100, (85, 100))
+                  ])
+</pre></div>
+</div>
+<p>Then we define the training and testing process, and run it.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>from graphscope.learning.examples import GCN
+from graphscope.learning.graphlearn.python.model.tf.trainer import LocalTFTrainer
+from graphscope.learning.graphlearn.python.model.tf.optimizer import get_tf_optimizer
+
+# supervised GCN.
+
+def train(config, graph):
+    def model_fn():
+        return GCN(graph,
+                   config[&quot;class_num&quot;],
+                   config[&quot;features_num&quot;],
+                   config[&quot;batch_size&quot;],
+                   val_batch_size=config[&quot;val_batch_size&quot;],
+                   test_batch_size=config[&quot;test_batch_size&quot;],
+                   categorical_attrs_desc=config[&quot;categorical_attrs_desc&quot;],
+                   hidden_dim=config[&quot;hidden_dim&quot;],
+                   in_drop_rate=config[&quot;in_drop_rate&quot;],
+                   neighs_num=config[&quot;neighs_num&quot;],
+                   hops_num=config[&quot;hops_num&quot;],
+                   node_type=config[&quot;node_type&quot;],
+                   edge_type=config[&quot;edge_type&quot;],
+                   full_graph_mode=config[&quot;full_graph_mode&quot;])
+
+    trainer = LocalTFTrainer(model_fn,
+                             epoch=config[&quot;epoch&quot;],
+                             optimizer=gl.get_tf_optimizer(
+                             config[&quot;learning_algo&quot;],
+                             config[&quot;learning_rate&quot;],
+                             config[&quot;weight_decay&quot;]))
+    trainer.train_and_evaluate()
+
+config = {&quot;class_num&quot;: 349, # output dimension
+          &quot;features_num&quot;: 130, # 128 dimension + kcore + triangle count
+          &quot;batch_size&quot;: 500,
+          &quot;val_batch_size&quot;: 100,
+          &quot;test_batch_size&quot;:100,
+          &quot;categorical_attrs_desc&quot;: &quot;&quot;,
+          &quot;hidden_dim&quot;: 256,
+          &quot;in_drop_rate&quot;: 0.5,
+          &quot;hops_num&quot;: 2,
+          &quot;neighs_num&quot;: [5, 10],
+          &quot;full_graph_mode&quot;: False,
+          &quot;agg_type&quot;: &quot;gcn&quot;,  # mean, sum
+          &quot;learning_algo&quot;: &quot;adam&quot;,
+          &quot;learning_rate&quot;: 0.0005,
+          &quot;weight_decay&quot;: 0.000005,
+          &quot;epoch&quot;: 20,
+          &quot;node_type&quot;: &quot;paper&quot;,
+          &quot;edge_type&quot;: &quot;cites&quot;}
+
+train(config, lg)
+</pre></div>
+</div>
+</div>
+<div class="section" id="closing-session">
+<h2>Closing Session<a class="headerlink" href="#closing-session" title="Permalink to this headline">¶</a></h2>
+<p>At last, we close the session after processing all graph tasks.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>sess.close()
+</pre></div>
+</div>
+<p>This operation will notify the backend engines and vineyard
+to safely unload graphs and their applications.
+Then, the coordinator will dealloc all the applied resources in the k8s cluster.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deployment.html" class="btn btn-neutral float-right" title="Deployment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2023, Damo Academy, Alibaba Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
